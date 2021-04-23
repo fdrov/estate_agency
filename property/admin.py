@@ -10,7 +10,7 @@ class FlatAdmin(admin.ModelAdmin):
     list_display = ['address', 'price', 'new_building', 'construction_year',
                     'created_at', 'town']
     list_editable = ['new_building']
-    list_filter = ['new_building']
+    list_filter = ['new_building', 'rooms_number', 'has_balcony']
     pass
 
 # admin.site.register(Flat, FlatAdmin)
