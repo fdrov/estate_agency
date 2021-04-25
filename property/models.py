@@ -37,13 +37,15 @@ class Flat(models.Model):
     construction_year = models.IntegerField(
         'Год постройки здания',
         null=True,
-        blank=True,
         db_index=True)
     new_building = models.BooleanField(null=True)
+    likes = models.ManyToManyField(User, verbose_name='Кто лайкнул',
+                                   blank=True)
     created_at = models.DateTimeField(
         'Когда создано объявление',
         default=timezone.now,
         db_index=True)
+
 
     def __str__(self):
         return f'{self.town}, {self.address} ({self.price}р.)'
