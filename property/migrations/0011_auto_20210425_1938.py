@@ -7,7 +7,10 @@ import phonenumbers
 def pure_phone_numbers(apps, schema_editor):
     Flat = apps.get_model('property', 'Flat')
     for flat in Flat.objects.all():
-        pure_number = phonenumbers.parse(flat.owners_phonenumber, 'RU')
+        try:
+            pure_number = phonenumbers.parse(flat.owners_phonenumber, 'RU')
+        except phonenumbers.phonenumberutil.NumberParseException:
+            continue
         if not phonenumbers.is_valid_number(pure_number):
             continue
         flat.owner_pure_phone = phonenumbers.format_number(
