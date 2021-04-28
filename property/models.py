@@ -46,7 +46,7 @@ class Flat(models.Model):
         db_index=True)
 
     def __str__(self):
-        return f'{self.town}, {self.address} {self.owners_phonenumber} ({self.price}р.)'
+        return f'{self.town}, {self.address} ({self.price}р.)'
 
 
 class Complaint(models.Model):
