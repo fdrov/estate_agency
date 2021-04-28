@@ -68,5 +68,10 @@ class Owner(models.Model):
                                      verbose_name='Квартиры в собственности',
                                      related_name='estate_owners')
 
+    def display_estates(self):
+        return ', '.join([ estate.address for estate in self.estates.all()])
+    display_estates.short_description = 'Квартиры'
+
+
     def __str__(self):
-        return self.full_name
+        return self.full_name, self.estates
