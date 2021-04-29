@@ -22,7 +22,8 @@ class Flat(models.Model):
     floor = models.CharField(
         'Этаж',
         max_length=3,
-        help_text='Первый этаж, последний этаж, пятый этаж')
+        help_text='Первый этаж, последний этаж, пятый этаж',
+        db_index=True)
     rooms_number = models.IntegerField(
         'Количество комнат в квартире',
         db_index=True)
@@ -37,7 +38,7 @@ class Flat(models.Model):
         'Год постройки здания',
         null=True,
         db_index=True)
-    new_building = models.BooleanField(null=True)
+    new_building = models.BooleanField(null=True, db_index=True)
     likes = models.ManyToManyField(User, verbose_name='Кто лайкнул',
                                    blank=True, related_name='liked_flats')
     created_at = models.DateTimeField(
@@ -63,9 +64,11 @@ class Complaint(models.Model):
 class Owner(models.Model):
     full_name = models.CharField(max_length=300, verbose_name='ФИО владельца',
                                  db_index=True)
-    owners_phonenumber = models.CharField('Номер владельца', max_length=20)
+    owners_phonenumber = models.CharField('Номер владельца', max_length=20,
+                                          db_index=True)
     owner_pure_phone = PhoneNumberField(blank=True,
-                                        verbose_name='Нормализованный номер владельца')
+                                        verbose_name='Нормализованный номер владельца',
+                                        db_index=True)
     estates = models.ManyToManyField(Flat,
                                      verbose_name='Квартиры в собственности',
                                      related_name='estate_owners')
